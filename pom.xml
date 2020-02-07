@@ -4,18 +4,14 @@
     <modelVersion>4.0.0</modelVersion>
     <artifactId>severaldatabases</artifactId>
     <name>Several Databases</name>
-
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>2.2.1.RELEASE</version>
     </parent>
-
     <properties>
         <start-class>com.severaldatabases.Application</start-class>
-        <guava.version>21.0</guava.version>
     </properties>
-
     <dependencies>
         <dependency>
             <groupId>org.projectlombok</groupId>
@@ -50,11 +46,6 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.google.guava</groupId>
-            <artifactId>guava</artifactId>
-            <version>${guava.version}</version>
         </dependency>
     </dependencies>
 </project>
