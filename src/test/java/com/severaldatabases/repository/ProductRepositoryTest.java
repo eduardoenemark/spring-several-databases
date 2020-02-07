@@ -1,4 +1,4 @@
-package com.severaldatabasess.repository;
+package com.severaldatabases.repository;
 
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,14 +7,12 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.severaldatabases.repository.ProductRepository;
 import com.severaldatabases.model.Product;
+import static java.lang.System.out;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.After;
-import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import org.junit.Test;
-import org.springframework.transaction.annotation.Propagation;
 
 @Slf4j
 @RunWith(SpringRunner.class)
@@ -29,14 +27,14 @@ public class ProductRepositoryTest {
     private ProductRepository testProductRepository;
 
     @Test
-    @Transactional(transactionManager = "transactionManager", propagation = Propagation.REQUIRES_NEW)
+    @Transactional(transactionManager = "transactionManager")
     public void saveOnMainTransactionManager() {
         this.productRepository.save(new Product(1001, "Book", 21d));
         assertTrue(this.productRepository.findById(1001).isPresent());
     }
 
     @Test
-    @Transactional(transactionManager = "testTransactionManager", propagation = Propagation.REQUIRES_NEW)
+    @Transactional(transactionManager = "testTransactionManager")
     public void saveOnTestTransactionManager() {
         this.testProductRepository.save(new Product(1002, "Coffe", 10));
         assertTrue(this.testProductRepository.findById(1002).isPresent());
@@ -44,7 +42,10 @@ public class ProductRepositoryTest {
 
     @After
     public void after() {
-        assertFalse(this.productRepository.findById(1002).isPresent());
-        assertFalse(this.testProductRepository.findById(1001).isPresent());
+//        assertFalse(this.productRepository.findById(1002).isPresent());
+//        assertFalse(this.testProductRepository.findById(1001).isPresent());
+        out.println("IS PRESENT?:" + this.productRepository.findById(1002).isPresent());
+        Product product = this.productRepository.findById(1002).get();
+        out.println("PRODUCT NAME: " + product.getName());
     }
 }
